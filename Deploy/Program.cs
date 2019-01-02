@@ -23,7 +23,7 @@ namespace Deploy
             try
             {
                 String[] arguments = Environment.GetCommandLineArgs();
-                app.ConnectToCRM(arguments);
+                app.ConnectToCRMAndRegisterWebHook(arguments);
             }
             catch (System.Exception ex)
             {
@@ -38,7 +38,7 @@ namespace Deploy
             }
         }
 
-        private void ConnectToCRM(String[] cmdargs)
+        private void ConnectToCRMAndRegisterWebHook(String[] cmdargs)
         {
             Configuration config = null;
             if (cmdargs.Length > 0)
