@@ -1,0 +1,413 @@
+{
+	"info": {
+		"_postman_id": "3201e94d-ab54-47fe-8fc8-e0ef689f8263",
+		"name": "web hook deploy test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Post web hook endpoint",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "If-None-Match",
+						"value": "null"
+					},
+					{
+						"key": "OData-Version",
+						"value": "4.0"
+					},
+					{
+						"key": "OData-MaxVersion",
+						"value": "4.0"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"authvalue\": \"<settings><setting name=\\\"Test-Auth-Header\\\" value=\\\"SECRETKEY\\\" /></settings>\",\r\n  \"authtype\": 5,\r\n  \"connectionmode\": 1,\r\n  \"contract\": 8,\r\n  \"name\": \"RequestBin Endpoint\",\r\n  \"url\": \"https://requestbin.fullcontact.com/1ei5sfk1\"\r\n}"
+				},
+				"url": {
+					"raw": "{{webapiurl}}serviceendpoints",
+					"host": [
+						"{{webapiurl}}serviceendpoints"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get web hook plugintype",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "If-None-Match",
+						"value": "null"
+					},
+					{
+						"key": "OData-Version",
+						"value": "4.0"
+					},
+					{
+						"key": "OData-MaxVersion",
+						"value": "4.0"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"authvalue\": \"<settings><setting name=\\\"Test-Auth-Header\\\" value=\\\"SECRETKEY\\\" /></settings>\",\r\n  \"authtype\": 5,\r\n  \"connectionmode\": 1,\r\n  \"contract\": 8,\r\n  \"name\": \"RequestBin Endpoint\",\r\n  \"url\": \"https://requestbin.fullcontact.com/1ei5sfk1\"\r\n}"
+				},
+				"url": {
+					"raw": "{{webapiurl}}plugintypes ?$select=plugintypeid&$filter=name eq 'Microsoft.Crm.Servicebus.WebHookPlugin'",
+					"host": [
+						"{{webapiurl}}plugintypes "
+					],
+					"query": [
+						{
+							"key": "$select",
+							"value": "plugintypeid"
+						},
+						{
+							"key": "$filter",
+							"value": "name eq 'Microsoft.Crm.Servicebus.WebHookPlugin'"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get update message",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "If-None-Match",
+						"value": "null"
+					},
+					{
+						"key": "OData-Version",
+						"value": "4.0"
+					},
+					{
+						"key": "OData-MaxVersion",
+						"value": "4.0"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"authvalue\": \"<settings><setting name=\\\"Test-Auth-Header\\\" value=\\\"SECRETKEY\\\" /></settings>\",\r\n  \"authtype\": 5,\r\n  \"connectionmode\": 1,\r\n  \"contract\": 8,\r\n  \"name\": \"RequestBin Endpoint\",\r\n  \"url\": \"https://requestbin.fullcontact.com/1ei5sfk1\"\r\n}"
+				},
+				"url": {
+					"raw": "{{webapiurl}}sdkmessages ?$select=sdkmessageid&$filter=name eq 'Update'",
+					"host": [
+						"{{webapiurl}}sdkmessages "
+					],
+					"query": [
+						{
+							"key": "$select",
+							"value": "sdkmessageid"
+						},
+						{
+							"key": "$filter",
+							"value": "name eq 'Update'"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get update opportunity message filter",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "If-None-Match",
+						"value": "null"
+					},
+					{
+						"key": "OData-Version",
+						"value": "4.0"
+					},
+					{
+						"key": "OData-MaxVersion",
+						"value": "4.0"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"authvalue\": \"<settings><setting name=\\\"Test-Auth-Header\\\" value=\\\"SECRETKEY\\\" /></settings>\",\r\n  \"authtype\": 5,\r\n  \"connectionmode\": 1,\r\n  \"contract\": 8,\r\n  \"name\": \"RequestBin Endpoint\",\r\n  \"url\": \"https://requestbin.fullcontact.com/1ei5sfk1\"\r\n}"
+				},
+				"url": {
+					"raw": "{{webapiurl}}sdkmessagefilters?$select=sdkmessagefilterid&$filter=primaryobjecttypecode eq 'opportunity' and sdkmessageid/sdkmessageid eq 20bebb1b-ea3e-db11-86a7-000a3a5473e8",
+					"host": [
+						"{{webapiurl}}sdkmessagefilters"
+					],
+					"query": [
+						{
+							"key": "$select",
+							"value": "sdkmessagefilterid"
+						},
+						{
+							"key": "$filter",
+							"value": "primaryobjecttypecode eq 'opportunity' and sdkmessageid/sdkmessageid eq 20bebb1b-ea3e-db11-86a7-000a3a5473e8"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get create message",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "If-None-Match",
+						"value": "null"
+					},
+					{
+						"key": "OData-Version",
+						"value": "4.0"
+					},
+					{
+						"key": "OData-MaxVersion",
+						"value": "4.0"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"authvalue\": \"<settings><setting name=\\\"Test-Auth-Header\\\" value=\\\"SECRETKEY\\\" /></settings>\",\r\n  \"authtype\": 5,\r\n  \"connectionmode\": 1,\r\n  \"contract\": 8,\r\n  \"name\": \"RequestBin Endpoint\",\r\n  \"url\": \"https://requestbin.fullcontact.com/1ei5sfk1\"\r\n}"
+				},
+				"url": {
+					"raw": "{{webapiurl}}sdkmessages ?$select=sdkmessageid&$filter=name eq 'Create'",
+					"host": [
+						"{{webapiurl}}sdkmessages "
+					],
+					"query": [
+						{
+							"key": "$select",
+							"value": "sdkmessageid"
+						},
+						{
+							"key": "$filter",
+							"value": "name eq 'Create'"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get create opportunity message filter",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "If-None-Match",
+						"value": "null"
+					},
+					{
+						"key": "OData-Version",
+						"value": "4.0"
+					},
+					{
+						"key": "OData-MaxVersion",
+						"value": "4.0"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"authvalue\": \"<settings><setting name=\\\"Test-Auth-Header\\\" value=\\\"SECRETKEY\\\" /></settings>\",\r\n  \"authtype\": 5,\r\n  \"connectionmode\": 1,\r\n  \"contract\": 8,\r\n  \"name\": \"RequestBin Endpoint\",\r\n  \"url\": \"https://requestbin.fullcontact.com/1ei5sfk1\"\r\n}"
+				},
+				"url": {
+					"raw": "{{webapiurl}}sdkmessagefilters?$select=sdkmessagefilterid&$filter=primaryobjecttypecode eq 'opportunity' and sdkmessageid/sdkmessageid eq 9ebdbb1b-ea3e-db11-86a7-000a3a5473e8",
+					"host": [
+						"{{webapiurl}}sdkmessagefilters"
+					],
+					"query": [
+						{
+							"key": "$select",
+							"value": "sdkmessagefilterid"
+						},
+						{
+							"key": "$filter",
+							"value": "primaryobjecttypecode eq 'opportunity' and sdkmessageid/sdkmessageid eq 9ebdbb1b-ea3e-db11-86a7-000a3a5473e8"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post update opportunity trigger",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "If-None-Match",
+						"value": "null"
+					},
+					{
+						"key": "OData-Version",
+						"value": "4.0"
+					},
+					{
+						"key": "OData-MaxVersion",
+						"value": "4.0"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"asyncautodelete\": false,\r\n\t\"filteringattributes\": \"name,budgetamount\",\r\n\t\"mode\": 1,\r\n\t\"name\": \"RequestBin test opportunity update\",\r\n\t\"description\": \"RequestBin test  opportunity update\",\r\n\t\"rank\": 1,\r\n\t\"stage\": 40,\r\n\t\"supporteddeployment\": 0,\r\n\t\"plugintypeid@odata.bind\": \"/plugintypes(fe4f0cdb-b254-4fa1-84f6-d58d0759b8b3)\",\r\n\t\"sdkmessagefilterid@odata.bind\": \"/sdkmessagefilters(58c9bb1b-ea3e-db11-86a7-000a3a5473e8)\",\r\n\t\"sdkmessageid@odata.bind\": \"/sdkmessages(20bebb1b-ea3e-db11-86a7-000a3a5473e8)\",\r\n\t\"eventhandler_serviceendpoint@odata.bind\": \"/serviceendpoints(283a92f2-de0e-e911-a969-000d3a18b4b9)\"\r\n}"
+				},
+				"url": {
+					"raw": "{{webapiurl}}sdkmessageprocessingsteps",
+					"host": [
+						"{{webapiurl}}sdkmessageprocessingsteps"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post create opportunity trigger",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "If-None-Match",
+						"value": "null"
+					},
+					{
+						"key": "OData-Version",
+						"value": "4.0"
+					},
+					{
+						"key": "OData-MaxVersion",
+						"value": "4.0"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"asyncautodelete\": false,\r\n\t\"filteringattributes\": \"name,budgetamount\",\r\n\t\"mode\": 1,\r\n\t\"name\": \"RequestBin test opportunity create\",\r\n\t\"description\": \"RequestBin test  opportunity create\",\r\n\t\"rank\": 1,\r\n\t\"stage\": 40,\r\n\t\"supporteddeployment\": 0,\r\n\t\"plugintypeid@odata.bind\": \"/plugintypes(fe4f0cdb-b254-4fa1-84f6-d58d0759b8b3)\",\r\n\t\"sdkmessagefilterid@odata.bind\": \"/sdkmessagefilters(fac5bb1b-ea3e-db11-86a7-000a3a5473e8)\",\r\n\t\"sdkmessageid@odata.bind\": \"/sdkmessages(9ebdbb1b-ea3e-db11-86a7-000a3a5473e8)\",\r\n\t\"eventhandler_serviceendpoint@odata.bind\": \"/serviceendpoints(283a92f2-de0e-e911-a969-000d3a18b4b9)\"\r\n}"
+				},
+				"url": {
+					"raw": "{{webapiurl}}sdkmessageprocessingsteps",
+					"host": [
+						"{{webapiurl}}sdkmessageprocessingsteps"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "accessToken",
+				"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Im5iQ3dXMTF3M1hrQi14VWFYd0tSU0xqTUhHUSIsImtpZCI6Im5iQ3dXMTF3M1hrQi14VWFYd0tSU0xqTUhHUSJ9.eyJhdWQiOiJodHRwczovL21yZXlub2xkczEuY3JtLmR5bmFtaWNzLmNvbSIsImlzcyI6Imh0dHBzOi8vc3RzLndpbmRvd3MubmV0L2RiYmRmYjU3LTE2NTktNDUwMy05ZTNjLTQ1MTM1MzhiNmNkZC8iLCJpYXQiOjE1NDY0NjgyNDYsIm5iZiI6MTU0NjQ2ODI0NiwiZXhwIjoxNTQ2NDcyMTQ2LCJhY3IiOiIxIiwiYWlvIjoiQVNRQTIvOEpBQUFBSHJaT1lLSDY0TzhSNElaa1ZJRmZuT213VXFpaE5vOU1oTmJvLzMybHNERT0iLCJhbXIiOlsicHdkIl0sImFwcGlkIjoiNTFmODE0ODktMTJlZS00YTllLWFhYWUtYTI1OTFmNDU5ODdkIiwiYXBwaWRhY3IiOiIwIiwiZmFtaWx5X25hbWUiOiJBUEkiLCJnaXZlbl9uYW1lIjoiU2NvdXQiLCJpcGFkZHIiOiI2Ny4yNTIuNDguMTA4IiwibmFtZSI6IlNjb3V0IEFQSSIsIm9pZCI6ImY5YTQ2OTgxLWEwMGUtNGMxYS05ZDNkLTdkY2YyMmZiYzU5YSIsInB1aWQiOiIxMDAzMjAwMDM1RkE0NkQxIiwic2NwIjoidXNlcl9pbXBlcnNvbmF0aW9uIiwic3ViIjoibFpMLWtJS3R6T3EyQnJTQmFpUDV2QXhFdkJ4Q01YZzFmRHo5ZzdwVjFYSSIsInRpZCI6ImRiYmRmYjU3LTE2NTktNDUwMy05ZTNjLTQ1MTM1MzhiNmNkZCIsInVuaXF1ZV9uYW1lIjoic2NvdXRhcGlAbXJleW5vbGRzMS5vbm1pY3Jvc29mdC5jb20iLCJ1cG4iOiJzY291dGFwaUBtcmV5bm9sZHMxLm9ubWljcm9zb2Z0LmNvbSIsInV0aSI6IlZNQ25iLUZfUmtHQ0l1eUhuNUlGQUEiLCJ2ZXIiOiIxLjAifQ.ZCZx2ifETvUy-j8pPwWwcWoOUYD4XcXg_ZcqGNkK0Mhj0PDDEccRsw4Puvw12cV_BL_2EpC7PEfCrQVpNUPhKEJAo1u0NXbfAcO25AXWh-of-QgvqAEDU9-GkrzcJEDSiHi4Bqt5ctVZzECWLus2ufaNWh1K0WLtdytrRF9IjzOEELC29uHOx7d4othm-11Fhik11f0E3_8KHo3CS39-mR8rc-iezwPXPZvnYPPNDHxJXOmcVx3aLJxA-3tVRazWHfr-_1t9OmLQoHRs_jVjjQWM1O40agqgxtZajPxCypGJTbjqEHCcYunELByEF0fiiHkZS-Z_YUCIfZ5iHQmw_g",
+				"type": "string"
+			},
+			{
+				"key": "tokenType",
+				"value": "Bearer",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "0348f81f-a2ec-42cc-82db-66217a987553",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "bc9486ac-dd63-425c-a0fd-5baa5cc9a99d",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
