@@ -76,6 +76,8 @@ namespace Deploy
             serviceEndpoint.Add("name", webhookName);
             serviceEndpoint.Add("url", webhookUrl);
 
+            string jsonContent = serviceEndpoint.ToString(); // for debug
+
             StringContent requestContent = new StringContent(serviceEndpoint.ToString(), Encoding.UTF8, "application/json");
             var response = httpClient.PostAsync("serviceendpoints", requestContent).Result;
 
@@ -115,7 +117,7 @@ namespace Deploy
                 // Processing steps that should trigger the webhook
                 // Trigger on update of opportunity fields name (topic) and budgetamount
                 var updateStep = new JObject();
-                updateStep.Add("asyncautodelete", true);
+                updateStep.Add("asyncautodelete", false); // Change to true for production!!
                 updateStep.Add("filteringattributes", "name,budgetamount");
                 updateStep.Add("mode", 1);
                 updateStep.Add("name", $"{webhookName} opportunity update");
@@ -127,6 +129,8 @@ namespace Deploy
                 updateStep.Add("sdkmessageid@odata.bind", $"/sdkmessages({ updateMessage["sdkmessageid"].ToString() })");
                 updateStep.Add("eventhandler_serviceendpoint@odata.bind", serviceendpointUrl);
 
+                jsonContent = updateStep.ToString(); // for debug
+
                 requestContent = new StringContent(updateStep.ToString(), Encoding.UTF8, "application/json");
                 response = httpClient.PostAsync("sdkmessageprocessingsteps", requestContent).Result;
                 if (!response.IsSuccessStatusCode)
@@ -136,7 +140,7 @@ namespace Deploy
                 }
 
                 var createStep = new JObject();
-                createStep.Add("asyncautodelete", true);
+                createStep.Add("asyncautodelete", false); // Change to true for production!!
                 createStep.Add("mode", 1);
                 createStep.Add("name", $"{webhookName} opportunity create");
                 createStep.Add("description", $"{webhookName} opportunity create");
@@ -147,6 +151,8 @@ namespace Deploy
                 createStep.Add("sdkmessageid@odata.bind", $"/sdkmessages({ createMessage["sdkmessageid"].ToString() })");
                 createStep.Add("plugintypeid@odata.bind", $"/plugintypes({ webhookPluginType["plugintypeid"].ToString() })");
                 createStep.Add("eventhandler_serviceendpoint@odata.bind", serviceendpointUrl);
+
+                jsonContent = createStep.ToString(); // for debug
 
                 requestContent = new StringContent(createStep.ToString(), Encoding.UTF8, "application/json");
                 response = httpClient.PostAsync("sdkmessageprocessingsteps", requestContent).Result;
