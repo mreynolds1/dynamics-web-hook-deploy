@@ -11,6 +11,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		web hook deploy test.postman_collection.json = web hook deploy test.postman_collection.json
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrmHelper", "CrmHelper\CrmHelper.csproj", "{9BBCFAF5-5449-4476-9431-BEFD10744610}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpportunityCurrency", "OpportunityCurrency\OpportunityCurrency.csproj", "{E4AB0973-A5B2-482A-AEC6-ED7AEF6642F1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{1C6DB1AE-AC9C-4269-9850-462F1E1271DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1C6DB1AE-AC9C-4269-9850-462F1E1271DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1C6DB1AE-AC9C-4269-9850-462F1E1271DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BBCFAF5-5449-4476-9431-BEFD10744610}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BBCFAF5-5449-4476-9431-BEFD10744610}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BBCFAF5-5449-4476-9431-BEFD10744610}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BBCFAF5-5449-4476-9431-BEFD10744610}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4AB0973-A5B2-482A-AEC6-ED7AEF6642F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4AB0973-A5B2-482A-AEC6-ED7AEF6642F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4AB0973-A5B2-482A-AEC6-ED7AEF6642F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4AB0973-A5B2-482A-AEC6-ED7AEF6642F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

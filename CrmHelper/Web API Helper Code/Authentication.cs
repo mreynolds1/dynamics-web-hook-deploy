@@ -169,34 +169,34 @@ namespace Microsoft.Crm.Sdk.Samples.HelperCode
         /// </summary>
         /// <returns>The URL of the authentication authority on the specified endpoint address, or an empty string
         /// if the authority cannot be discovered.</returns>
-         public static string DiscoverAuthority(string serviceUrl)
+        public static string DiscoverAuthority(string serviceUrl)
         {
             return "https://login.windows.net/common";
-/*
-            try
-            {
-                AuthenticationParameters ap = AuthenticationParameters.CreateFromResourceUrlAsync(
-                    new Uri(serviceUrl + "api/data/")).Result;
+            /*
+                        try
+                        {
+                            AuthenticationParameters ap = AuthenticationParameters.CreateFromResourceUrlAsync(
+                                new Uri(serviceUrl + "api/data/")).Result;
 
-                return ap.Authority;
-            }
-            catch (HttpRequestException e)
-            {
-                throw new Exception("An HTTP request exception occurred during authority discovery.", e);
-            }
-            catch (System.Exception e )
-            {
-                // This exception ocurrs when the service is not configured for OAuth.
-                if( e.HResult == -2146233088 )
-                {
-                    return String.Empty;
-                }
-                else
-                {
-                    throw e;
-                }
-            }
-*/
+                            return ap.Authority;
+                        }
+                        catch (HttpRequestException e)
+                        {
+                            throw new Exception("An HTTP request exception occurred during authority discovery.", e);
+                        }
+                        catch (System.Exception e )
+                        {
+                            // This exception ocurrs when the service is not configured for OAuth.
+                            if( e.HResult == -2146233088 )
+                            {
+                                return String.Empty;
+                            }
+                            else
+                            {
+                                throw e;
+                            }
+                        }
+            */
         }
 
         /// <summary>
@@ -205,10 +205,9 @@ namespace Microsoft.Crm.Sdk.Samples.HelperCode
         /// <param name="serviceUrl">The specified endpoint address</param>
         /// <returns>The URL of the authentication authority on the specified endpoint address, or an empty string
         /// if the authority cannot be discovered.</returns>
+        /*
         public static async Task<string> DiscoverAuthorityAsync(string serviceUrl)
         {
-            return "https://login.windows.net/common";
-/*
             try
             {
                 AuthenticationParameters ap = await AuthenticationParameters.CreateFromResourceUrlAsync(
@@ -234,8 +233,8 @@ namespace Microsoft.Crm.Sdk.Samples.HelperCode
                     throw e;
                 }
             }
-*/
         }
+        */
 
         /// <summary>
         /// Sets the client message handler as appropriate for the type of authentication
@@ -274,7 +273,7 @@ namespace Microsoft.Crm.Sdk.Samples.HelperCode
         {
             Authentication _auth = null;
 
-            public OAuthMessageHandler( Authentication auth, HttpMessageHandler innerHandler )
+            public OAuthMessageHandler(Authentication auth, HttpMessageHandler innerHandler)
                 : base(innerHandler)
             {
                 _auth = auth;

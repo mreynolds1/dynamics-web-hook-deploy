@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Xml;
 using System.Net;
+using CrmHelper;
 
 namespace Deploy
 {
@@ -23,7 +24,8 @@ namespace Deploy
             try
             {
                 String[] arguments = Environment.GetCommandLineArgs();
-                app.ConnectToCRMAndRegisterWebHook(arguments);
+                app.httpClient = CrmAPIHelper.CreateConnection(arguments);
+                app.RegisterWebHook();
             }
             catch (System.Exception ex)
             {
@@ -38,20 +40,8 @@ namespace Deploy
             }
         }
 
-        private void ConnectToCRMAndRegisterWebHook(String[] cmdargs)
+        private void RegisterWebHook()
         {
-            Configuration config = null;
-            if (cmdargs.Length > 0)
-                config = new FileConfiguration("default");
-
-            Authentication auth = new Authentication(config);
-            httpClient = new HttpClient(auth.ClientHandler, true);
-            httpClient.BaseAddress = new Uri(config.ServiceUrl + "api/data/v9.1/");
-            httpClient.Timeout = new TimeSpan(0, 2, 0);
-            httpClient.DefaultRequestHeaders.Add("OData-MaxVersion", "4.0");
-            httpClient.DefaultRequestHeaders.Add("OData-Version", "4.0");
-            httpClient.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/json"));
 
             //create a service endpoint
             var webhookUrl = "https://requestbin.fullcontact.com/1ei5sfk1";
@@ -93,22 +83,22 @@ namespace Deploy
 
                 // Retrieve the plugintype, sdkmessage, and sdkmessagefilter data we will need to create the webhook triggers
                 JObject webhookPluginType;
-                webhookPluginType = RetrieveSingleRecord("plugintypes", new string[] { "plugintypeid" }, "name eq 'Microsoft.Crm.Servicebus.WebHookPlugin'");
+                webhookPluginType = CrmAPIHelper.RetrieveSingleRecord(httpClient, "plugintypes", new string[] { "plugintypeid" }, "name eq 'Microsoft.Crm.Servicebus.WebHookPlugin'");
 
                 JObject updateMessage;
-                updateMessage = RetrieveSingleRecord("sdkmessages", new string[] { "sdkmessageid" }, "name eq 'Update'");
+                updateMessage = CrmAPIHelper.RetrieveSingleRecord(httpClient, "sdkmessages", new string[] { "sdkmessageid" }, "name eq 'Update'");
 
                 JObject updateMessageFilter;
-                updateMessageFilter = RetrieveSingleRecord(
+                updateMessageFilter = CrmAPIHelper.RetrieveSingleRecord(httpClient, 
                     "sdkmessagefilters",
                     new string[] { "sdkmessagefilterid" },
                     $"primaryobjecttypecode eq 'opportunity' and sdkmessageid/sdkmessageid eq { updateMessage["sdkmessageid"] }");
 
                 JObject createMessage;
-                createMessage = RetrieveSingleRecord("sdkmessages", new string[] { "sdkmessageid" }, "name eq 'Create'");
+                createMessage = CrmAPIHelper.RetrieveSingleRecord(httpClient, "sdkmessages", new string[] { "sdkmessageid" }, "name eq 'Create'");
 
                 JObject createMessageFilter;
-                createMessageFilter = RetrieveSingleRecord(
+                createMessageFilter = CrmAPIHelper.RetrieveSingleRecord(httpClient, 
                     "sdkmessagefilters",
                     new string[] { "sdkmessagefilterid" },
                     $"primaryobjecttypecode eq 'opportunity' and sdkmessageid/sdkmessageid eq { createMessage["sdkmessageid"] }");
@@ -163,31 +153,6 @@ namespace Deploy
                 }
             }
 
-        }
-
-        private JObject RetrieveSingleRecord(string entityPluralName, string[] properties, string filterCriteria)
-        {
-            if(properties == null || properties.Length < 1 || string.IsNullOrWhiteSpace(filterCriteria))
-            {
-                throw new Exception("Must supply filter criteria and at least one property");
-            }
-
-            JObject result;
-
-            var queryOptions = "?$select=" + String.Join(",", properties) + "&$filter=" + filterCriteria;
-            var queryResponse = httpClient.GetAsync(entityPluralName + queryOptions).Result;
-            if (queryResponse.StatusCode == HttpStatusCode.OK) //200  
-            {
-                JObject body = JsonConvert.DeserializeObject<JObject>
-                        (queryResponse.Content.ReadAsStringAsync().Result);
-                result = (JObject)body["value"][0];
-            }
-            else
-            {
-                throw new CrmHttpResponseException(queryResponse.Content);
-            }
-
-            return result;
         }
 
         private static void DisplayException(Exception ex)
