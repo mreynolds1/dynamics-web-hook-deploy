@@ -43,7 +43,6 @@ namespace OpportunityCurrency
 
         private void OpportunityCurrencyExample()
         {
-            string jsonContent;
             StringContent requestContent;
             HttpResponseMessage response;
 
@@ -105,7 +104,6 @@ namespace OpportunityCurrency
                 account.Add("name", accountName);
                 account.Add("transactioncurrencyid@odata.bind", $"/transactioncurrencies({ cad["transactioncurrencyid"].ToString() })");
 
-                jsonContent = account.ToString(); // for debug
                 requestContent = new StringContent(account.ToString(), Encoding.UTF8, "application/json");
                 response = httpClient.PostAsync("accounts", requestContent).Result;
 
@@ -143,7 +141,26 @@ namespace OpportunityCurrency
             }
             opportunity.Add("opportunitycompetitors_association", competitors);
 
-            jsonContent = opportunity.ToString(); // for debug
+            /* example of the json body for this request:
+            {
+              "name": "Canadian Opportunity 1b28859f-4c9c-451a-b25a-67bf79bb8908",
+              "budgetamount": 1000,
+              "parentaccountid@odata.bind": "/accounts(585d24d8-9d7d-4553-b2b6-e8c225e24f69)",
+              "transactioncurrencyid@odata.bind": "/transactioncurrencies(31aab109-0e05-e911-a95f-000d3a1ccf71)",
+              "opportunitycompetitors_association": [
+                {
+                  "name": "Competitor ae862edf-2683-4bb1-b11c-4745052e4801"
+                },
+                {
+                  "name": "Competitor 1a82e99d-0294-47a9-8c35-606ecdc85151"
+                },
+                {
+                  "name": "Competitor 8699c39e-93ab-4566-9742-890d1ff3827b"
+                }
+              ]
+            } 
+            */
+
             requestContent = new StringContent(opportunity.ToString(), Encoding.UTF8, "application/json");
             response = httpClient.PostAsync("opportunities", requestContent).Result;
 
